@@ -1,0 +1,36 @@
+unit Clinica.Controller.PesquisarPermicao;
+
+interface
+
+type
+  TClasse = class(TInterfacedObject, iClasse)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iClasse;
+  end;
+
+implementation
+
+{ TClasse }
+
+constructor TClasse.Create;
+begin
+
+end;
+
+destructor TClasse.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TClasse.New: iClasse;
+begin
+  result := self.Create;
+end;
+
+end.

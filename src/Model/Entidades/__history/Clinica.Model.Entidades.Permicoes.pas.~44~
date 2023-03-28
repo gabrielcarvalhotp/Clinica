@@ -1,0 +1,164 @@
+unit Clinica.Model.Entidades.Permicoes;
+
+interface
+
+uses
+  Clinica.Model.Entidades.Interfaces.Permicoes, 
+  Clinica.Model.Entidades.Interfaces.Padrao, Clinica.Model.Conexao.Interfaces;
+
+type
+  TModelEntidadesPermicoes = class(TInterfacedObject, iModelEntidadesInterfacesPermicoes)
+  private
+    FPadrao : iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPermicoes>;
+    FDataSet : IModelDataSet;
+    FId_Usuario: integer;
+    FExecutar: string;
+    FInserir: string;
+    FAlterar: string;
+    FDeletar: string;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelEntidadesInterfacesPermicoes;
+    function Id_Usuario(aValue: string) : iModelEntidadesInterfacesPermicoes; overload;
+    function Executar(aValue: string) : iModelEntidadesInterfacesPermicoes; overload;
+    function Inserir(aValue: string) : iModelEntidadesInterfacesPermicoes; overload;
+    function Alterar(aValue: string) : iModelEntidadesInterfacesPermicoes; overload;
+    function Deletar(aValue: string) : iModelEntidadesInterfacesPermicoes; overload;
+    function Id_Usuario: integer; overload;
+    function Executar: string; overload;
+    function Inserir: string; overload;
+    function Alterar: string; overload;
+    function Deletar: string; overload;
+    function Padrao : iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPermicoes>; 
+    function Pesquisar(aName, aId : string) : iModelEntidadesInterfacesPermicoes;
+    function Atribuir : iModelEntidadesInterfacesPermicoes;  
+  end;
+
+implementation
+
+uses
+  System.SysUtils,
+  Clinica.Model.Entidades.Padrao, Clinica.Controller.Conexao.DataSet, 
+  Clinica.Controller.Conexao.Connection;
+
+constructor TModelEntidadesPermicoes.Create;
+begin
+  FPadrao := TModelEntidadesPadrao<iModelEntidadesInterfacesPermicoes>.New(self);
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar)
+end;
+
+destructor TModelEntidadesPermicoes.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TModelEntidadesPermicoes.New: iModelEntidadesInterfacesPermicoes;
+begin
+  result := self.Create;
+end;
+
+function TModelEntidadesPermicoes.Id_Usuario(aValue: string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FId_Usuario := StrToInt(aValue)
+end;
+
+function TModelEntidadesPermicoes.Alterar(aValue: string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FAlterar := aValue;
+end;
+
+function TModelEntidadesPermicoes.Alterar: string;
+begin
+   result := FAlterar;
+end;
+
+function TModelEntidadesPermicoes.Atribuir : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  self
+   .Padrao
+    .Id(FDataSet.FieldByName('ID'))
+     .Nome(FDataSet.FieldByName('NOME'))
+      .Data_Cadastro(FDataSet.FieldByName('DATA_CADASTRO'))
+       .Data_Alteracao(FDataSet.FieldByName('DATA_ALTERACAO'))
+        .Usuario_Alteracao(FDataSet.FieldByName('USUARIO_ALTERACAO'))
+.&End    .Id_Usuario(FDataSet.FieldByName('ID_USUARIO'))
+          .Executar(FDataSet.FieldByName('EXECUTAR'))
+           .Inserir(FDataSet.FieldByName('INSERIR'))
+            .Alterar(FDataSet.FieldByName('ALTERAR'))
+             .Deletar(FDataSet.FieldByName('DELETAR'))
+end;
+
+function TModelEntidadesPermicoes.Deletar: string;
+begin
+  result := FDeletar;
+end;
+
+function TModelEntidadesPermicoes.Deletar(aValue: string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FDeletar := aValue;
+end;
+
+function TModelEntidadesPermicoes.Executar(aValue: string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FExecutar := aValue;
+end;
+
+function TModelEntidadesPermicoes.Executar: string;
+begin
+  result := FExecutar;
+end;
+
+function TModelEntidadesPermicoes.Id_Usuario: integer;
+begin
+  result := FId_Usuario;
+end;
+
+function TModelEntidadesPermicoes.Inserir: string;
+begin
+  result := FInserir
+end;
+
+function TModelEntidadesPermicoes.Inserir(aValue: string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FInserir := aValue;
+end;
+
+function TModelEntidadesPermicoes.Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPermicoes>;
+begin
+  result := FPadrao;
+end;
+
+function TModelEntidadesPermicoes.Pesquisar(aName, aId : string) : iModelEntidadesInterfacesPermicoes;
+begin
+  result := self;
+  FDataSet
+  .Close
+   .Clear
+    .Sql(' SELECT ' + 
+         '   USUARIOS_PERMICOES.ID, ' +
+         '   USUARIOS_PERMICOES.NOME, ' + 
+         '   USUARIOS_PERMICOES.DATA_CADASTRO, ' +
+         '   USUARIOS_PERMICOES.DATA_ALTERACAO, ' +
+         '   USUARIOS_PERMICOES.USUARIO_ALTERACAO,' +
+         '   USUARIOS_PERMICOES.ID_USUARIO, ' + 
+         '   USUARIOS_PERMICOES.EXECUTAR, ' + 
+         '   USUARIOS_PERMICOES.INSERIR, ' + 
+         '   USUARIOS_PERMICOES.ALTERAR, ' +
+         '   USUARIOS_PERMICOES.DELETAR ' + 
+         ' FROM ' + 
+         '   USUARIOS_PERMICOES ' +
+         ' WHERE ' + 
+         '   USUARIOS_PERMICOES.ID_USUARIO = ' + aId +
+         ' AND ' +
+         '   USUARIOS_PERMICOES.NOME = ' + QuotedStr(aName)).Active
+end;
+
+end.

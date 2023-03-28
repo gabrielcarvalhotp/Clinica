@@ -1,0 +1,39 @@
+unit Clinica.Controller.Entidades.Usuarios;
+
+interface
+
+uses
+  Clinica.Controller.Entidades.Interfaces.Usuarios;
+
+type
+  TControllerEntidadesUsuarios = class(TInterfacedObject, iControllerEntidadesInterfacesUsuarios)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerEntidadesInterfacesUsuarios;
+  end;
+
+implementation
+
+{ TControllerEntidadesUsuarios }
+
+constructor TControllerEntidadesUsuarios.Create;
+begin
+
+end;
+
+destructor TControllerEntidadesUsuarios.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerEntidadesUsuarios.New: iControllerEntidadesInterfacesUsuarios;
+begin
+  result := self.Create;
+end;
+
+end.

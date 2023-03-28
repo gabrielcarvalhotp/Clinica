@@ -1,0 +1,115 @@
+unit Clinica.Model.Login;
+
+interface
+
+uses
+  Vcl.StdCtrls,
+  Clinica.Model.Interfaces.Login,  
+  Clinica.Model.Conexao.Interfaces;
+
+type
+  TModelLogin = class(TInterfacedObject, iModelInterfacesLogin)
+  private
+    { private }
+    FDataSet: iModelDataSet;
+    FLogin : string;
+    FSenha : string;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelInterfacesLogin;
+    function Login(aValue: TEdit): iModelInterfacesLogin;
+    function Senha(aValue : TEdit) : iModelInterfacesLogin; 
+    function Usuario : iModelInterfacesLogin;
+  end;
+
+implementation
+
+uses
+  System.SysUtils, 
+  Vcl.Forms, 
+  Winapi.Windows, 
+  Clinica.Controller.Conexao.Connection,
+  Clinica.Controller.Conexao.DataSet,
+  Clinica.Controller.Entidades.Usuarios,
+  Clinica.Controller.Login;
+
+{ TModelLogin }
+
+constructor TModelLogin.Create;
+begin
+   FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar)
+end;
+
+destructor TModelLogin.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TModelLogin.New: iModelInterfacesLogin;
+begin
+  result := self.Create;
+end;
+
+function TModelLogin.Senha(aValue: TEdit): iModelInterfacesLogin;
+begin
+  result := self;
+  FSenha := aValue.text;
+  if trim(aValue.Text) = '' then
+  begin
+    aValue.SetFocus;
+    Application.MessageBox('Informe o campo!', 'Atenção', MB_Ok + MB_ICONWARNING);
+    Abort;
+  end
+end;
+
+function TModelLogin.Usuario: iModelInterfacesLogin;
+begin
+  FDataSet
+   .Close
+   .Clear
+   .Sql(' SELECT ' +
+        '   USUARIOS.ID_USUARIOS,' +
+        '   USUARIOS.NOME, ' + 
+        '   USUARIOS.SENHA, ' + 
+        '   USUARIOS.DATA_CADASTRO, ' + 
+        '   USUARIOS.DATA_ALTERACAO, ' + 
+        '   USUARIOS.USUARIO_ALTERACAO ' +
+        ' FROM ' + 
+        '   USUARIOS ' + 
+        ' WHERE ' + 
+        '   USUARIOS.NOME = ' + QuotedStr(FLogin) + 
+        ' AND ' + 
+        '   USUARIOS.SENHA = ' + QuotedStr(FSenha))
+   .Active;
+
+  if FDataSet.DataSet.RecordCount = 1 then
+    TControllerEntidadesUsuarios
+    .New
+     .UsuarioLogado
+      .Padrao
+       .Id(FDataSet.FieldByName('ID_USUARIOS'))
+        .Nome(FDataSet.FieldByName('NOME'))
+         .Data_Cadastro(FDataSet.FieldByName('DATA_CADASTRO'))
+          .Data_Alteracao(FDataSet.FieldByName('DATA_ALTERACAO'))
+           .Usuario_Alteracao(FDataSet.FieldByName('USUARIO_ALTERACAO'))
+    .&End   .Senha(FDataSet.FieldByName('SENHA'))        
+  else
+    raise Exception.Create('Usuario não encontrado!');
+end;
+
+function TModelLogin.Login(aValue: TEdit): iModelInterfacesLogin;
+begin
+  result := self;
+  FLogin := aValue.text;
+  if trim(aValue.Text) = '' then
+  begin
+    aValue.SetFocus;
+    Application.MessageBox('Informe o campo!', 'Atenção', MB_Ok + MB_ICONWARNING);
+    Abort;
+  end
+end;
+
+end.

@@ -1,0 +1,256 @@
+inherited FrmCadAgendamentos: TFrmCadAgendamentos
+  Caption = 'FrmCadAgendamentos'
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited pnlMain: TPanel
+    inherited pnlHeader: TPanel
+      inherited Label1: TLabel
+        Width = 377
+        Caption = 'Cadatro de Agendamentos'
+        ExplicitWidth = 377
+      end
+    end
+    inherited pnlGrid: TPanel
+      inherited CardPanel: TCardPanel
+        inherited CardPesquisa: TCard
+          inherited DBGridPesquisa: TDBGrid
+            Columns = <
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'CODIGO'
+                Width = 80
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DATA_CONSULTA'
+                Width = 161
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'HORA_CONSULTA'
+                Width = 159
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOME_PACIENTE'
+                Width = 165
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ESPECIALIDADE'
+                Width = 189
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MEDICO'
+                Width = 187
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VALOR'
+                Width = 96
+                Visible = True
+              end>
+          end
+        end
+        inherited CardCadastro: TCard
+          object Label3: TLabel [0]
+            Left = 13
+            Top = 16
+            Width = 13
+            Height = 13
+            Caption = ' Id'
+          end
+          object Label5: TLabel [1]
+            Left = 98
+            Top = 16
+            Width = 73
+            Height = 13
+            Caption = ' Data Cadastro'
+          end
+          object Label6: TLabel [2]
+            Left = 204
+            Top = 16
+            Width = 84
+            Height = 13
+            Caption = ' Data Atualiza'#231#227'o'
+          end
+          object Label4: TLabel [3]
+            Left = 13
+            Top = 56
+            Width = 44
+            Height = 13
+            Caption = ' Paciente'
+          end
+          object SpdBtnPesquisa: TSpeedButton [4]
+            Left = 78
+            Top = 71
+            Width = 22
+            Height = 21
+            Caption = '...'
+            Layout = blGlyphBottom
+            OnClick = SpdBtnPesquisaClick
+          end
+          object Label7: TLabel [5]
+            Left = 106
+            Top = 56
+            Width = 30
+            Height = 13
+            Caption = ' Nome'
+          end
+          object Label8: TLabel [6]
+            Left = 13
+            Top = 98
+            Width = 68
+            Height = 13
+            Caption = 'Data Consulta'
+          end
+          object Label9: TLabel [7]
+            Left = 120
+            Top = 98
+            Width = 23
+            Height = 13
+            Caption = 'Hora'
+          end
+          object Label10: TLabel [8]
+            Left = 13
+            Top = 139
+            Width = 64
+            Height = 13
+            Caption = 'Especialidade'
+          end
+          object Label11: TLabel [9]
+            Left = 13
+            Top = 181
+            Width = 78
+            Height = 13
+            Caption = 'Nome do M'#233'dico'
+          end
+          object Label12: TLabel [10]
+            Left = 12
+            Top = 222
+            Width = 40
+            Height = 13
+            Caption = 'Valor R$'
+          end
+          object edId: TEdit
+            Left = 12
+            Top = 30
+            Width = 80
+            Height = 21
+            Color = clGray
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object edDataCadastro: TDateTimePicker
+            Left = 98
+            Top = 30
+            Width = 100
+            Height = 21
+            Date = 44999.000000000000000000
+            Time = 0.831715763888496400
+            Enabled = False
+            TabOrder = 2
+          end
+          object edDataAtualizacao: TDateTimePicker
+            Left = 204
+            Top = 30
+            Width = 100
+            Height = 21
+            Date = 44999.000000000000000000
+            Time = 0.831715763888496400
+            Enabled = False
+            TabOrder = 3
+          end
+          object edPacienteId: TEdit
+            Left = 12
+            Top = 71
+            Width = 60
+            Height = 21
+            TabOrder = 4
+            OnChange = edPacienteIdChange
+            OnExit = edPacienteIdExit
+          end
+          object edNomePaciente: TEdit
+            Left = 106
+            Top = 71
+            Width = 202
+            Height = 21
+            Color = clGray
+            ReadOnly = True
+            TabOrder = 5
+          end
+          object edDataConsulta: TDateTimePicker
+            Left = 12
+            Top = 112
+            Width = 101
+            Height = 21
+            Date = 45003.000000000000000000
+            Time = 0.505631412037473600
+            TabOrder = 6
+          end
+          object edHoraConsulta: TTimePicker
+            Left = 119
+            Top = 112
+            Width = 89
+            Height = 21
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Segoe UI'
+            Font.Style = []
+            TabOrder = 7
+            Time = 45003.505915324070000000
+            TimeFormat = 'hh:mm'
+          end
+          object CBTipoConsulta: TComboBox
+            Left = 12
+            Top = 154
+            Width = 183
+            Height = 21
+            TabOrder = 8
+            OnChange = CBTipoConsultaChange
+            Items.Strings = (
+              'Nutricionista'
+              'Cardiologista'
+              'Ortopedista'
+              'Terapeuta')
+          end
+          object edNomeMedico: TEdit
+            Left = 12
+            Top = 195
+            Width = 245
+            Height = 21
+            Color = clWhite
+            TabOrder = 9
+          end
+          object edValorConsulta: TEdit
+            Left = 11
+            Top = 236
+            Width = 80
+            Height = 21
+            Color = clGray
+            ReadOnly = True
+            TabOrder = 10
+          end
+          object btnCalcular: TButton
+            Left = 97
+            Top = 234
+            Width = 75
+            Height = 25
+            Caption = 'Calcular'
+            TabOrder = 11
+            OnClick = btnCalcularClick
+          end
+        end
+      end
+    end
+  end
+end

@@ -1,0 +1,32 @@
+unit Clinica.Model.Entidades.Interfaces.Pacientes;
+
+interface
+
+uses
+  Clinica.Model.Conexao.Interfaces, Clinica.Model.Entidades.Interfaces.Padrao, 
+  Clinica.Model.Entidades.Interfaces.Permicoes, 
+  Clinica.Model.Entidades.Interfaces.Usuarios, Data.DB;
+
+type
+  iModelEntidadesInterfacesPacientes = interface
+    ['{6B75E73D-045B-47F6-AB55-5248FAABCED2}']
+    function Data_Nascimento(aValue: string): iModelEntidadesInterfacesPacientes; overload;
+    function Idade(aValue: string): iModelEntidadesInterfacesPacientes;overload;
+    function Telefone(aValue: string): iModelEntidadesInterfacesPacientes; overload;
+    function Email(aValue: string): iModelEntidadesInterfacesPacientes; overload;
+    function Plano_Saude(aValue: string) : iModelEntidadesInterfacesPacientes; overload;
+    function Data_Nascimento: string; overload;
+    function Idade: string; overload;
+    function Telefone: string; overload;
+    function Email: string; overload;
+    function Plano_Saude: string; overload;
+    function DataSet: IModelDataSet;
+    function Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesUsuarios>;
+    function Permicoes: iModelEntidadesInterfacesPermicoes;
+    function DataSource(aValue: TDataSource): iModelEntidadesInterfacesUsuarios; 
+    procedure DAO;
+  end;
+
+implementation
+
+end.

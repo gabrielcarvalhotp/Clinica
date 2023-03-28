@@ -1,0 +1,7 @@
+unit Clinica.Model.Interfaces.PesquisaPermicao;
+
+interface
+
+implementation
+
+end.

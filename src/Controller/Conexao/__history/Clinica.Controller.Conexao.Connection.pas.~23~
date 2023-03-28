@@ -1,0 +1,57 @@
+unit Clinica.Controller.Conexao.Connection;
+interface
+
+uses
+  Clinica.Model.Conexao.Interfaces,
+  Clinica.Controller.Conexao.Interfaces;
+
+type
+  TControllerConexaoConectar = class(TInterfacedObject, iControllerFactoryConexao)
+  private
+    
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerFactoryConexao;
+    function Conectar: iModelConnection;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.Conexao.Connection, System.SysUtils, Vcl.Forms;
+
+function TControllerConexaoConectar.Conectar: iModelConnection;
+var
+  Arquivo: string;
+begin
+  Arquivo := ExtractFilePath(Application.ExeName) + 'DATABASETESTES.FDB';
+  result := TModelConexaoConnection
+            .new
+             .paramentros
+              .DataBase(Arquivo)
+               .UserName('SYSDBA')
+                .Password('masterkey')
+                 .DriverId('FB')
+                  .Server('localhost')
+                   .Porta('3050')
+  .&End             .Conectar;                  
+end;
+
+constructor TControllerConexaoConectar.Create;
+begin
+
+end;
+
+destructor TControllerConexaoConectar.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerConexaoConectar.New: iControllerFactoryConexao;
+begin
+  result := self.Create;
+end;
+
+end.                                                                                   

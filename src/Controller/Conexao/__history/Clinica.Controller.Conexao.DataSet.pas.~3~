@@ -1,0 +1,50 @@
+unit Clinica.Controller.Conexao.DataSet;
+
+interface
+
+uses
+  Clinica.Controller.Conexao.Interfaces, 
+  Clinica.Model.Conexao.Interfaces;
+
+type
+  TControllerConexaoFactoryDataSet = class(TInterfacedObject, iControllerFactoryDataSet)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerFactoryDataSet;
+    function FDQuery(aValue: iModelConnection): iModelDataSet;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.Conexao.DataSet;
+
+{ TControllerConexaoFactoryDataSet }
+
+constructor TControllerConexaoFactoryDataSet.Create;
+begin
+
+end;
+
+function TControllerConexaoFactoryDataSet.FDQuery(aValue: iModelConnection): iModelDataSet;
+begin
+
+  result := TModelConexaoDataSet.new(aValue);
+end;
+
+destructor TControllerConexaoFactoryDataSet.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TControllerConexaoFactoryDataSet.New: iControllerFactoryDataSet;
+begin
+  result := self.Create;
+end;
+
+end.

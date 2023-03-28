@@ -1,0 +1,16 @@
+unit Clinica.Model.Interfaces.Login;
+
+interface
+
+uses
+  Vcl.StdCtrls;
+type
+  iModelInterfacesLogin = interface
+  ['{1EF446A6-6CD5-472F-8422-E23A49864D65}']
+  function ValidarUsuario(aValue : TEdit) : iModelInterfacesLogin; 
+  function ValidarSennha(aValue : TEdit) : iModelInterfacesLogin; 
+end;
+
+implementation
+
+end.

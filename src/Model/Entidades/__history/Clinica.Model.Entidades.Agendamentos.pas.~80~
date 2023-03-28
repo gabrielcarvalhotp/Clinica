@@ -1,0 +1,235 @@
+unit Clinica.Model.Entidades.Agendamentos;
+
+interface
+
+uses
+  Clinica.Model.Entidades.Interfaces.Agendamentos, 
+  Clinica.Model.Conexao.Interfaces, Clinica.Model.Entidades.Interfaces.Padrao, 
+  Data.DB;
+
+type
+  TModelEntidadesAgendamentos = class(TInterfacedObject, iModelEntidadesInterfacesAgendamentos)
+  private
+    { private }
+    FDataSet : iModelDataSet;
+    FPadrao : iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesAgendamentos>;
+    FId_Paciente : integer;        
+    FTipo_Consulta : string;
+    FData_Consulta : TDate;      
+    FHora_Consulta : TTime;      
+    FMedico_Consulta : string;    
+    FValor_Consulta : double;
+    FWhere
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelEntidadesInterfacesAgendamentos;
+    function Id_Paciente(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Tipo_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Data_Consulta(aValue : TDate) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Hora_Consulta(aValue : TTime) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Medico_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Valor_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Id_Paciente : integer;overload;
+    function Tipo_Consulta : string;overload;
+    function Data_Consulta : TDate;overload;
+    function Hora_Consulta : TTime;overload;
+    function Medico_Consulta : string;overload;
+    function Valor_Consulta : double;overload;
+    function Padrao : iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesAgendamentos>;
+    function DataSet : iModelDataSet;
+    function DataSource(aValue: TDataSource): iModelEntidadesInterfacesAgendamentos;
+    function Todos : iModelEntidadesInterfacesAgendamentos;
+    function Grid : iModelEntidadesInterfacesAgendamentos;
+    function Checked(aValue : TObject) :  iModelEntidadesInterfacesAgendamentos;
+    function TodosRegistros : iModelEntidadesInterfacesAgendamentos;
+    procedure DAO;  
+  end;
+
+implementation
+
+uses
+  Clinica.Controller.Conexao.DataSet, Clinica.Controller.Conexao.Connection, 
+  Clinica.Model.Entidades.Padrao, System.SysUtils, 
+  Clinica.Model.DAO.Agendamentos, Vcl.StdCtrls;
+
+{ TModelEntidadesAgendamentos }
+
+function TModelEntidadesAgendamentos.Checked(aValue : TObject) : iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  if TCheckBox(aValue).Checked then
+    TodosRegistros
+  else
+    Grid; 
+end;
+
+constructor TModelEntidadesAgendamentos.Create;
+begin
+  FPadrao := TModelEntidadesPadrao<iModelEntidadesInterfacesAgendamentos>.New(self);
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar);
+  Grid;            
+end;
+
+procedure TModelEntidadesAgendamentos.DAO;
+begin
+  TModelDAOAgendamentos.New.DAO(self);
+end;
+
+function TModelEntidadesAgendamentos.DataSet: iModelDataSet;
+begin
+  result := FDataSet;
+end;
+
+function TModelEntidadesAgendamentos.DataSource(aValue: TDataSource): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  aValue.DataSet := FDataSet.DataSet;
+end;
+
+function TModelEntidadesAgendamentos.Data_Consulta(aValue: TDate): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  FData_Consulta := aValue;
+end;
+
+function TModelEntidadesAgendamentos.Data_Consulta: TDate;
+begin
+  result := FData_Consulta;
+end;
+
+destructor TModelEntidadesAgendamentos.Destroy;
+begin
+  inherited;
+
+end;
+
+function TModelEntidadesAgendamentos.Grid: iModelEntidadesInterfacesAgendamentos;
+begin
+ FDataSet
+   .Close
+   .Clear
+   .Sql(' SELECT '+
+        '   AGENDAMENTOS.ID_AGENDAMENTO AS CODIGO,'+
+        '   AGENDAMENTOS.DATA_CONSULTA, '+
+        '   AGENDAMENTOS.HORA_CONSULTA, '+
+        '   PACIENTES.NOME AS NOME_PACIENTE, '+
+        '   AGENDAMENTOS.TIPO_CONSULTA AS ESPECIALIDADE, '+
+        '   AGENDAMENTOS.MEDICO_CONSULTA AS MEDICO, '+
+        '   AGENDAMENTOS.VALOR_CONSULTA AS VALOR '+
+        ' FROM '+
+        '   AGENDAMENTOS '+
+        '   INNER JOIN PACIENTES ON PACIENTES.ID = AGENDAMENTOS.ID_PACIENTE '+
+        '   INNER JOIN USUARIOS ON USUARIOS.ID_USUARIOS = AGENDAMENTOS.USUARIO_ALTERACAO ' +
+        ' WHERE ' +
+        '   CAST((AGENDAMENTOS.DATA_CONSULTA + AGENDAMENTOS.HORA_CONSULTA) AS TIMESTAMP) > (CAST(' + QuotedStr('NOW') + ' AS TIMESTAMP)) ' + 
+        ' ORDER BY ' + 
+        '   AGENDAMENTOS.DATA_CONSULTA ')
+   .Active;
+end;
+
+function TModelEntidadesAgendamentos.Hora_Consulta(aValue: TTime): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  FHora_Consulta := aValue;
+end;
+
+function TModelEntidadesAgendamentos.Hora_Consulta: TTime;
+begin
+  result := FHora_Consulta;
+end;
+
+function TModelEntidadesAgendamentos.Id_Paciente(aValue: string): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  if aValue = '' then
+    raise Exception.Create('O código do paciente não pode ser vazio!');
+  FId_Paciente := StrToInt(aValue)
+end;
+
+function TModelEntidadesAgendamentos.Id_Paciente: integer;
+begin
+  result := FId_Paciente;
+end;
+
+function TModelEntidadesAgendamentos.Medico_Consulta(aValue: string): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;           
+  if aValue = '' then
+    raise Exception.Create('O nome do médico não pode ser vazio!');
+  FMedico_Consulta := aValue;
+end;
+
+function TModelEntidadesAgendamentos.Medico_Consulta: string;
+begin
+  result := FMedico_Consulta;
+end;
+
+class function TModelEntidadesAgendamentos.New: iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self.Create;
+end;
+
+function TModelEntidadesAgendamentos.Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesAgendamentos>;
+begin
+  result := FPadrao;
+end;
+
+function TModelEntidadesAgendamentos.Tipo_Consulta: string;
+begin
+  result := FTipo_Consulta;
+end;
+
+function TModelEntidadesAgendamentos.Todos: iModelEntidadesInterfacesAgendamentos;
+var
+  id : string;
+begin
+  id := FDataSet.FieldByName('CODIGO');         
+  FDataSet.Close.Clear.Sql(' SELECT * FROM AGENDAMENTOS WHERE ID_AGENDAMENTO = ' + id ).Active;
+end;
+
+function TModelEntidadesAgendamentos.TodosRegistros: iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  
+  FDataSet
+   .Close
+   .Clear
+   .Sql(' SELECT '+
+        '   AGENDAMENTOS.ID_AGENDAMENTO AS CODIGO,'+
+        '   AGENDAMENTOS.DATA_CONSULTA, '+
+        '   AGENDAMENTOS.HORA_CONSULTA, '+
+        '   PACIENTES.NOME AS NOME_PACIENTE, '+
+        '   AGENDAMENTOS.TIPO_CONSULTA AS ESPECIALIDADE, '+
+        '   AGENDAMENTOS.MEDICO_CONSULTA AS MEDICO, '+
+        '   AGENDAMENTOS.VALOR_CONSULTA AS VALOR '+
+        ' FROM '+
+        '   AGENDAMENTOS '+
+        '   INNER JOIN PACIENTES ON PACIENTES.ID = AGENDAMENTOS.ID_PACIENTE '+
+        '   INNER JOIN USUARIOS ON USUARIOS.ID_USUARIOS = AGENDAMENTOS.USUARIO_ALTERACAO '+
+        ' ORDER BY '+
+        '   AGENDAMENTOS.DATA_CONSULTA DE  SC')
+   .Active;
+end;
+
+function TModelEntidadesAgendamentos.Tipo_Consulta(aValue: string): iModelEntidadesInterfacesAgendamentos;
+begin
+ result := self;
+ FTipo_Consulta := aValue;
+end;
+
+function TModelEntidadesAgendamentos.Valor_Consulta(aValue: string): iModelEntidadesInterfacesAgendamentos;
+begin
+  result := self;
+  if aValue = '' then
+    raise Exception.Create('O valor da consulta não pode ser vazio!');
+  FValor_Consulta := StrToFloat(aValue);
+end;
+
+function TModelEntidadesAgendamentos.Valor_Consulta: double;
+begin
+  result := FValor_Consulta; 
+end;
+
+end.

@@ -1,0 +1,15 @@
+unit Clinica.Model.Interfaces.PesquisaPermicao;
+
+interface
+
+uses
+  System.Classes;
+type
+  iModelInterfacesPesquisaPermicao = interface
+    ['{EA048A58-0DEC-436B-B2F9-36C86B9B267F}']
+    function Pesquisa(aValue : TList) : integer;
+  end;
+
+implementation
+
+end.

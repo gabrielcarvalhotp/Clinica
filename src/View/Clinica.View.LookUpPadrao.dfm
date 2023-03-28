@@ -1,0 +1,94 @@
+object FrmPesquisa: TFrmPesquisa
+  Left = 0
+  Top = 0
+  Caption = 'Pesquisa'
+  ClientHeight = 428
+  ClientWidth = 380
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 8
+    Top = 8
+    Width = 120
+    Height = 19
+    Caption = 'Pesquisa(c'#243'digo)'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 152
+    Top = 8
+    Width = 113
+    Height = 19
+    Caption = 'Pesquisa(nome)'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object edPesquisaId: TEdit
+    Left = 8
+    Top = 32
+    Width = 120
+    Height = 27
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnChange = edPesquisaIdChange
+  end
+  object DBGridPesquisa: TDBGrid
+    Left = 8
+    Top = 65
+    Width = 364
+    Height = 355
+    BiDiMode = bdLeftToRight
+    DataSource = DSLookUp
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    ParentBiDiMode = False
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    OnCellClick = DBGridPesquisaCellClick
+    OnDrawColumnCell = DBGridPesquisaDrawColumnCell
+  end
+  object edPesquisaNome: TEdit
+    Left = 152
+    Top = 32
+    Width = 220
+    Height = 27
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnChange = edPesquisaNomeChange
+  end
+  object DSLookUp: TDataSource
+    Left = 240
+    Top = 336
+  end
+end

@@ -1,0 +1,36 @@
+unit Clinica.Controller.Entidades.Agendamentos;
+
+interface
+
+type
+  TControllerEntidadesAgendamentos = class(TInterfacedObject, iClasse)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iClasse;
+  end;
+
+implementation
+
+{ TControllerEntidadesAgendamentos }
+
+constructor TControllerEntidadesAgendamentos.Create;
+begin
+
+end;
+
+destructor TControllerEntidadesAgendamentos.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerEntidadesAgendamentos.New: iClasse;
+begin
+  result := self.Create;
+end;
+
+end.

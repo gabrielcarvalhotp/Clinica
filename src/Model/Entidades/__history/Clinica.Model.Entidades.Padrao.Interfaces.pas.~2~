@@ -1,0 +1,14 @@
+unit Clinica.Model.Entidades.Padrao.Interfaces;
+
+interface
+ type
+
+ iModelEntidadesPadraoInterfaces = interface
+   ['{2270E02D-A96A-482D-B029-F483D4B8543F}']
+   function : iModelEntidadesUsuariosInterfaces;overload;
+   function : iModelEntidadesUsuariosInterfaces;overload;
+ end;
+
+implementation
+
+end.

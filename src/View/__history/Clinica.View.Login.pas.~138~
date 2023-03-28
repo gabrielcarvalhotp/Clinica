@@ -1,0 +1,67 @@
+unit Clinica.View.Login;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TFrmLogin = class(TForm)
+    pnlEsquerda: TPanel;
+    imgLogo: TImage;
+    pnlPrincipal: TPanel;
+    Panel1: TPanel;
+    lblNomeAplicacao: TLabel;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    edtSenha: TEdit;
+    Panel4: TPanel;
+    Label3: TLabel;
+    edtUsuario: TEdit;
+    btnEntrar: TButton;
+    Label2: TLabel;
+    SpeedButton1: TSpeedButton;
+    procedure btnEntrarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+    FStatus: integer;
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+uses
+  Clinica.Controller.Login;
+
+{$R *.dfm}
+
+procedure TFrmLogin.btnEntrarClick(Sender: TObject);
+begin
+  TControllerLogin.New
+   .Login
+   .Login(edtUsuario)
+   .Senha(edtSenha)
+   .Usuario;
+   
+  Self.Close;
+end;
+procedure TFrmLogin.SpeedButton1Click(Sender: TObject);
+begin
+  application.Terminate;
+end;
+
+end.

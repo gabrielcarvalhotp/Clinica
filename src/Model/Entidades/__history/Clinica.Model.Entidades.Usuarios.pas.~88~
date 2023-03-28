@@ -1,0 +1,136 @@
+unit Clinica.Model.Entidades.Usuarios;
+
+interface
+
+uses
+  System.Generics.Collections,
+  Clinica.Model.Entidades.Interfaces.Padrao,
+  Clinica.Model.Entidades.Interfaces.Usuarios,
+  Clinica.Model.Conexao.Interfaces, 
+  Clinica.Model.Entidades.Interfaces.Permicoes, Data.DB, 
+  Clinica.Model.DAO.Interfaces.Usuarios;
+
+type
+  TModelEntidadesUsuarios = class(TinterfacedObject, iModelEntidadesInterfacesUsuarios)
+  private
+    FPadrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesUsuarios>;
+    FDataSet: iModelDataSet;
+    FPemicoes : iModelEntidadesInterfacesPermicoes;
+    FSenha: string;
+  public
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelEntidadesInterfacesUsuarios;
+    function Senha(aValue: string): iModelEntidadesInterfacesUsuarios; overload;
+    function Senha: string; overload;
+    function Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesUsuarios>;
+    function DataSet: iModelDataSet; 
+    function Permicoes : iModelEntidadesInterfacesPermicoes;
+    function DataSource(aValue : TDataSource) : iModelEntidadesInterfacesUsuarios;
+    function Todos : iModelEntidadesInterfacesUsuarios;
+    function Grid : iModelEntidadesInterfacesUsuarios;
+    procedure DAO;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.Entidades.Padrao,
+  Clinica.Controller.Conexao.DataSet,
+  Clinica.Controller.Conexao.Connection, System.Classes, 
+  Clinica.Model.Entidades.Permicoes, Clinica.Model.DAO.Usuarios, FireDAC.Phys.IBBase, 
+  System.SysUtils;
+
+constructor TModelEntidadesUsuarios.Create;
+begin
+  FPadrao := TModelEntidadesPadrao<iModelEntidadesInterfacesUsuarios>.New(self);
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar);
+  Grid;
+  FPemicoes := TModelEntidadesPermicoes.New;
+end;
+
+procedure TModelEntidadesUsuarios.DAO;
+begin
+  TModelDaoUsuarios.New.DAO(self);
+end;
+
+function TModelEntidadesUsuarios.DataSet: iModelDataSet;
+begin
+  result := FDataSet;
+end;
+
+function TModelEntidadesUsuarios.DataSource(aValue: TDataSource): iModelEntidadesInterfacesUsuarios;
+begin
+  result := self;
+  aValue.DataSet := FDataSet.DataSet;
+end;
+
+destructor TModelEntidadesUsuarios.Destroy;
+begin
+  
+  inherited;
+end;
+
+function TModelEntidadesUsuarios.Grid: iModelEntidadesInterfacesUsuarios;
+begin
+  FDataSet
+    .Close
+    .Close
+    .Sql(' SELECT '+
+         '   USUARIOS.ID_USUARIOS AS CODIGO, '+
+         '   USUARIOS.NOME AS NOME_USUARIO, '+
+         '   USUARIOS.DATA_CADASTRO '+
+         ' FROM '+
+         '   USUARIOS ' +
+         ' ORDER BY ' + 
+         '   USUARIOS.ID_USUARIOS ')
+    .Active;
+end;
+
+class function TModelEntidadesUsuarios.New: iModelEntidadesInterfacesUsuarios;
+begin
+  result := self.Create;
+end;
+
+function TModelEntidadesUsuarios.Senha(aValue: string) : iModelEntidadesInterfacesUsuarios;
+begin
+  result := self;
+  if aValue = '' then
+    raise Exception.Create('Sua senha não pode ser vazia!');
+  FSenha := aValue;
+end;
+
+function TModelEntidadesUsuarios.Senha: string;
+begin
+  result := FSenha;
+end;
+
+function TModelEntidadesUsuarios.Todos: iModelEntidadesInterfacesUsuarios;
+var
+  id : string;
+begin
+  id := FDataSet.FieldByName('CODIGO');
+  FDataSet
+    .Close
+    .Close
+    .Sql(' SELECT '+
+         '   * '+
+         ' FROM '+
+         '   USUARIOS ' +
+         ' WHERE ' +
+         '   USUARIOS.ID_USUARIOS = ' + id)
+         
+    .Active;
+end;
+
+function TModelEntidadesUsuarios.Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesUsuarios>;
+begin
+   result := FPadrao;
+end;
+
+function TModelEntidadesUsuarios.Permicoes: iModelEntidadesInterfacesPermicoes;
+begin
+  result := FPemicoes;
+end;
+
+end.

@@ -1,0 +1,98 @@
+unit Clinica.View.Login;
+
+interface
+
+uses
+  Winapi.Windows,
+  Winapi.Messages,
+  System.SysUtils,
+  System.Variants,
+  System.Classes,
+  Vcl.Graphics,
+  Vcl.Controls,
+  Vcl.Forms,
+  Vcl.Dialogs,
+  Vcl.StdCtrls,
+  Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TFrmLogin = class(TForm)
+    pnlEsquerda: TPanel;
+    imgLogo: TImage;
+    pnlPrincipal: TPanel;
+    Panel1: TPanel;
+    lblNomeAplicacao: TLabel;
+    Label1: TLabel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    edtSenha: TEdit;
+    Panel4: TPanel;
+    Label3: TLabel;
+    edtUsuario: TEdit;
+    btnEntrar: TButton;
+    Label2: TLabel;
+    SpeedButton1: TSpeedButton;
+    procedure btnEntrarClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+  private
+    { Private declarations }
+    FStatus: integer;
+  public
+    { Public declarations }
+  end;
+
+implementation
+
+uses
+  Clinica.Controller.Login;
+
+{$R *.dfm}
+
+procedure TFrmLogin.btnEntrarClick(Sender: TObject);
+begin
+  TControllerLogin
+  .New
+   .Login
+    .Login(edtUsuario)
+     .Senha(edtSenha)
+      .Usuario;
+      
+  Self.Close;
+
+  {FDataSet
+   .Close
+    .Clear
+     .Sql(' SELECT ' + 
+          '   USUARIOS.ID_USUARIOS,' +
+          '   USUARIOS.NOME, ' + 
+          '   USUARIOS.SENHA, ' + 
+          '   USUARIOS.DATA_CADASTRO, ' + 
+          '   USUARIOS.DATA_ALTERACAO, ' + 
+          '   USUARIOS.USUARIO_ALTERACAO ' +
+          ' FROM ' + 
+          '   USUARIOS ' + 
+          ' WHERE ' + 
+          '   USUARIOS.NOME = ' + QuotedStr(edtUsuario.Text) + 
+          ' AND ' + 
+          '   USUARIOS.SENHA = ' + QuotedStr(edtSenha.Text)).Active;
+
+  if FDataSet.DataSet.RecordCount = 1 then
+  try
+    TControllerEntidadesUsuarios
+    .New
+     .UsuarioLogado
+      .Padrao
+       .Id(FDataSet.FieldByName('ID_USUARIOS'))
+        .Nome(FDataSet.FieldByName('NOME'))
+         .Data_Cadastro(FDataSet.FieldByName('DATA_CADASTRO'))
+          .Data_Alteracao(FDataSet.FieldByName('DATA_ALTERACAO'))
+           .Usuario_Alteracao(FDataSet.FieldByName('USUARIO_ALTERACAO'))
+    .&End   .Senha(FDataSet.FieldByName('SENHA'));}
+end;
+procedure TFrmLogin.SpeedButton1Click(Sender: TObject);
+begin
+  application.Terminate;
+end;
+
+end.

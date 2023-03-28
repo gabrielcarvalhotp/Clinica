@@ -1,0 +1,63 @@
+unit Clinica.Controller.Entidades.Usuarios;
+
+interface
+
+uses
+  Clinica.Controller.Entidades.Interfaces.Usuarios, 
+  Clinica.Model.Entidades.Interfaces.Usuarios;
+
+type
+  TControllerEntidadesUsuarios = class(TInterfacedObject, iControllerEntidadesInterfacesUsuarios)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerEntidadesInterfacesUsuarios;
+    function UsuarioLogado : iModelEntidadesInterfacesUsuarios;
+    function SELECT : string;
+  end;
+
+implementation
+
+uses
+  Clinica.View.Principal;
+
+{ TControllerEntidadesUsuarios }
+
+constructor TControllerEntidadesUsuarios.Create;
+begin
+
+end;
+
+destructor TControllerEntidadesUsuarios.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerEntidadesUsuarios.New: iControllerEntidadesInterfacesUsuarios;
+begin
+  result := self.Create;
+end;
+
+function TControllerEntidadesUsuarios.SELECT: string;
+begin
+  result := ' SELECT '+
+              ' USUARIOS.ID_USUARIOS,'+
+              ' USUARIOS.NOME, '+
+              ' USUARIOS.SENHA, '+
+              ' USUARIOS.DATA_CADASTRO, '+
+              ' USUARIOS.DATA_ALTERACAO, '+
+              ' USUARIOS.USUARIO_ALTERACAO, '+
+            ' FROM '+
+              ' USUARIOS ';
+end;
+
+function TControllerEntidadesUsuarios.UsuarioLogado: iModelEntidadesInterfacesUsuarios;
+begin
+  result := FrmPrincipal.Usuario;
+end;
+
+end.

@@ -1,0 +1,21 @@
+unit Clinica.Model.Entidades.Interfaces.Agendamentos;
+
+interface
+  type
+  iModelEntidadesInterfacesAgendamentos = interface
+    ['{7FBEE9E7-36E7-4183-8181-C7EC0E031729}']
+    function Id_Paciente(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Tipo_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Data_Consulta(aValue : TDate) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Hora_Consulta(aValue : TTime) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Medico_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Valor_Consulta(aValue : string) : iModelEntidadesInterfacesAgendamentos;overload;
+    function Id_Paciente : integer;overload;
+    function Tipo_Consulta : string;overload;
+    function Data_Consulta : TDate;overload;
+    function Hora_Consulta : TTime;overload;
+  end;
+
+implementation
+
+end.

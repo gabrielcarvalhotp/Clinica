@@ -1,0 +1,7 @@
+unit Clinica.Controller.Entidades.Interfaces.Agendamentos;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,39 @@
+unit Clinica.Controller.Login;
+
+interface
+
+uses
+  Clinica.Controller.Interfaces.Login;
+
+type
+  TControllerLogin = class(TInterfacedObject, iControllerInterfacesLogin)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerInterfacesLogin;
+  end;
+
+implementation
+
+{ TControllerLogin }
+
+constructor TControllerLogin.Create;
+begin
+
+end;
+
+destructor TControllerLogin.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerLogin.New: iControllerInterfacesLogin;
+begin
+  result := self.Create;
+end;
+
+end.

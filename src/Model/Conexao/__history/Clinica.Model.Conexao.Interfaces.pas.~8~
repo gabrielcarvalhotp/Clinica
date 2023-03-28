@@ -1,0 +1,49 @@
+unit Clinica.Model.Conexao.Interfaces;
+
+interface
+uses
+  Data.DB,
+  FireDAC.Comp.Client;
+
+type
+  iModelConexaoParametros = interface;
+
+  iModelConnection = interface
+    ['{88AC2E57-E680-47AB-A875-8E0E817E1A4D}']
+    function paramentros: iModelConexaoParametros;
+    function Conexao: TFDCustomConnection;
+    function Conectar: iModelConnection;
+  end;
+
+  iModelConexaoParametros = interface
+    ['{43CC3944-6085-49B4-9342-50E82E27A427}']
+    function DataBase(aValue: string): iModelConexaoParametros; overload;
+    function DataBase: string; overload;
+    function UserName(aValue: string): iModelConexaoParametros; overload;
+    function UserName: string; overload;
+    function Password(aValue: string): iModelConexaoParametros; overload;
+    function Password: string; overload;
+    function DriverId(aValue: string): iModelConexaoParametros; overload;
+    function DriverId: string; overload;
+    function Server(aValue: string): iModelConexaoParametros; overload;
+    function Server: string; overload;
+    function Porta(aValue: string): iModelConexaoParametros; overload;
+    function Porta: string; overload;
+    function &End: iModelConnection;
+  end;
+
+  iModelDataSet = interface
+    ['{841476DF-262D-4C80-AD5A-0A52036D3111}']
+    function Close: iModelDataSet;
+    function Clear: iModelDataSet;
+    function Sql(aValue : string): iModelDataSet;
+    function FieldByName(aValue: string): variant;
+    function Active: iModelDataSet;
+    function DataSet: TDataSet;
+    function ParamsByName(aName, aValue : variant) : iModelDataSet; 
+  end;
+
+
+implementation
+
+end.

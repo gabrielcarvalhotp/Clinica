@@ -1,0 +1,7 @@
+unit Clinica.Model.DAO.Interfaces.Usuarios;
+
+interface
+
+implementation
+
+end.

@@ -1,0 +1,20 @@
+unit Clinica.Controller.Conexao.Interfaces;
+interface
+
+uses
+  Clinica.Model.Conexao.Interfaces;
+
+type
+  iControllerFactoryConexao = interface
+    ['{23F3A853-D82B-40D3-9D62-6350A628189E}']
+    function Conectar: iModelConnection;
+  end;
+
+  iControllerFactoryDataSet = interface
+    ['{D91DAA23-7B34-431E-B454-83DC3410BC1D}']
+    function FDQuery(aValue: iModelConnection): iModelDataSet;
+  end;
+
+implementation
+
+end.

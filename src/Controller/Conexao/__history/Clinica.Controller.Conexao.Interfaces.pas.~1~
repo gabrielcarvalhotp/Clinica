@@ -1,0 +1,7 @@
+unit Clinica.Controller.Conexao.Interfaces;
+
+interface
+
+implementation
+
+end.

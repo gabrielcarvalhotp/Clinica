@@ -1,0 +1,7 @@
+unit Clinica.Model.Interfaces.Login;
+
+interface
+
+implementation
+
+end.

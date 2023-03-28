@@ -1,0 +1,16 @@
+unit Clinica.Controller.Interfaces.ValorConsulta;
+
+interface
+
+uses
+  Vcl.StdCtrls, Clinica.Model.Entidades.Interfaces.Pacientes;
+  type
+  iControllerInterfacesValorConsulta = interface
+    ['{0579CCFC-3915-41BD-8A36-09889CDA378F}']
+    procedure Calcular(aMethod, aPanoSaude : string; aParam : TEdit);
+    procedure Nutricionista(aValue : TEdit; aPaciente : iModelEntidadesInterfacesPacientes);
+  end;
+
+implementation
+
+end.

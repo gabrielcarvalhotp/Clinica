@@ -1,0 +1,64 @@
+unit Clinica.Model.Conexao.Connection;
+
+interface
+
+uses
+  Data.DB,
+  Firedac.Comp.Client,
+  Firedac.Phys.FB,
+  Firedac.Comp.UI,
+  Firedac.Stan.Intf,
+  Firedac.Stan.Option,
+  Firedac.Stan.Error,
+  Firedac.UI.Intf,
+  Firedac.Phys.Intf,
+  Firedac.Stan.Def,
+  Firedac.Stan.Pool,
+  Firedac.Stan.Async,
+  Firedac.Phys,
+  Firedac.Phys.FBDef,
+  Firedac.VCLUI.Wait,
+  Firedac.Phys.IBBase,
+  Firedac.DApt,
+  System.Classes,
+  Clinica.Model.Conexao.Interfaces;
+
+type
+  TModelConexaoConnection = class(TInterfacedObject, iModelConnection)
+  private
+    { private }
+    FConnection: TFDConnection;
+    FParametros : iModelConexaoParametros;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelConnection;
+    function paramentros: iModelConexaoParametros;
+    function Conexao: TFDCustomConnection;
+    function Conectar: iModelConnection;
+  end;
+
+implementation
+
+{ TModelConexaoConnection }
+
+constructor TModelConexaoConnection.Create;
+begin
+
+end;
+
+destructor TModelConexaoConnection.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TModelConexaoConnection.New: iModelConnection;
+begin
+  result := self.Create;
+end;
+
+end.

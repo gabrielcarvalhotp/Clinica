@@ -1,0 +1,12 @@
+unit Clinica.Controller.Interfaces.PesquisarPermicao;
+
+interface
+type
+ iControllerInterfacesPesquisarPermicao = interface
+   ['{FE2D45AC-2DFB-40B3-B4A8-3F4B924D8BEA}']
+   function PesquisarPermicao : iModelInterfacesPesquisaPermicao;
+ end;
+
+implementation
+
+end.

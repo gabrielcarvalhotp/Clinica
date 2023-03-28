@@ -1,0 +1,7 @@
+unit Clinica.Model.Conexao.Parametros;
+
+interface
+
+implementation
+
+end.

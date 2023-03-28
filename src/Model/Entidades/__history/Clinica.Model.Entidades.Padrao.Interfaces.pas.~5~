@@ -1,0 +1,23 @@
+unit Clinica.Model.Entidades.Padrao.Interfaces;
+
+interface
+
+type
+
+  iModelEntidadesPadraoInterfaces = interface
+    ['{2270E02D-A96A-482D-B029-F483D4B8543F}']
+    function Id(aValue: string): iModelEntidadesPadraoInterfaces; overload;
+    function Nome(aValue: string): iModelEntidadesPadraoInterfaces; overload;
+    function Data_Cadastro(aValue: string) : iModelEntidadesPadraoInterfaces; overload;
+    function Data_Alteracao(aValue: string) : iModelEntidadesPadraoInterfaces; overload;
+    function Usuario_Alteracao(aValue: string) : iModelEntidadesPadraoInterfaces; overload;
+    function Id: integer; overload;
+    function Nome: string; overload;
+    function Data_Cadatro: string; overload;
+    function Data_Altercao: string; overload;
+    function Usuario_Alteracao: string; overload;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,71 @@
+unit Clinica.Model.PesquisaPermicao;
+
+interface
+
+uses
+  Clinica.Model.Interfaces.PesquisaPermicao,
+  System.Classes,
+  Clinica.Model.Entidades.Interfaces.Permicoes, System.Generics.Collections;
+
+type
+  TModelPesquisaPermicao = class(TInterfacedObject, iModelInterfacesPesquisaPermicao)
+  private
+    { private }
+    FPermicao : string;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelInterfacesPesquisaPermicao;
+    function Permicao(aValue : string) : iModelInterfacesPesquisaPermicao;
+    function Pesquisa(aValue : TList<iModelEntidadesInterfacesPermicoes>) : integer;
+  end;
+
+implementation
+
+uses
+  System.SysUtils, Vcl.Dialogs;
+
+{ TModelPesquisaPermicao }
+
+{ TModelPesquisaPermicao }
+
+constructor TModelPesquisaPermicao.Create;
+begin
+
+end;
+
+destructor TModelPesquisaPermicao.Destroy;
+begin
+
+  inherited;
+end;
+
+class function TModelPesquisaPermicao.New: iModelInterfacesPesquisaPermicao;
+begin
+   result := self.Create;
+end;
+
+function TModelPesquisaPermicao.Permicao(aValue: string): iModelInterfacesPesquisaPermicao;
+begin
+  result := self;
+  FPermicao := aValue;
+end;
+
+function TModelPesquisaPermicao.Pesquisa(aValue: TList<iModelEntidadesInterfacesPermicoes>): integer;
+var
+  i : integer;
+  Index : integer;
+begin
+  for I := 0 to aValue.Count - 1 do
+  begin
+    ShowMessage(I.ToString);
+    showmessage(aValue[i].Padrao.Nome);
+    if aValue[i].Padrao.Nome = FPermicao then
+      index := i;
+    result := index;
+  end;
+    
+end;
+
+end.

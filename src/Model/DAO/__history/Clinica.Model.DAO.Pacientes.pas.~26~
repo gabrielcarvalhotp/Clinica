@@ -1,0 +1,109 @@
+unit Clinica.Model.DAO.Pacientes;
+
+interface
+
+uses
+  Clinica.Model.DAO.Interfaces.Pacientes, 
+  Clinica.Model.Entidades.Interfaces.Pacientes;
+
+type
+  TModelDAOPacientes = class(TInterfacedObject, iModelDAOInterfacesPacientes)
+  private
+    { private }
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelDAOInterfacesPacientes;
+    function DAO(aValue : iModelEntidadesInterfacesPacientes) : iModelDAOInterfacesPacientes;
+    function CriarPaciente(aValue : iModelEntidadesInterfacesPacientes) : iModelDAOInterfacesPacientes;
+    function EditarPaciente(aValue : iModelEntidadesInterfacesPacientes) : iModelDAOInterfacesPacientes;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.PersisteDados;
+
+{ TModelDAOPacientes }
+
+constructor TModelDAOPacientes.Create;
+begin
+
+end;
+
+function TModelDAOPacientes.CriarPaciente(aValue: iModelEntidadesInterfacesPacientes): iModelDAOInterfacesPacientes;
+var
+  lSql : string;
+begin
+  lSql := ' INSERT INTO PACIENTES VALUES (?,?,?,?,?,?,?,?,?,?) ';
+  
+  TModelPersisteDados.New
+    .PrepareStatement(lSql)
+    .SetValue(1, aValue.Padrao.Nome)
+    .SetValue(2, aValue.Padrao.Data_Cadatro)
+    .SetValue(3, aValue.Padrao.Data_Altercao)
+    .SetValue(4, aValue.Padrao.Usuario_Alteracao)
+    .SetValue(5, aValue.DataNascimento)
+    .SetValue(6, aValue.Idade)
+    .SetValue(7, aValue.Telefone)
+    .SetValue(8, aValue.Email)
+    .SetValue(9, aValue.Plano_Saude)
+    .ExecSQL
+end;
+
+function TModelDAOPacientes.DAO(aValue: iModelEntidadesInterfacesPacientes): iModelDAOInterfacesPacientes;
+begin
+  result := self;
+  if aValue.Padrao.Id = -1 then
+    CriarPaciente(aValue)
+  else
+    EditarPaciente(aValue);
+end;
+
+destructor TModelDAOPacientes.Destroy;
+begin
+  inherited;
+
+end;
+
+function TModelDAOPacientes.EditarPaciente(aValue: iModelEntidadesInterfacesPacientes): iModelDAOInterfacesPacientes;
+var
+  lSql : string;
+begin
+  lSql := ' UPDATE '+
+          '   PACIENTES '+
+          ' SET '+
+          '   PACIENTES.NOME = :pNome, '+
+          '   PACIENTES.DATA_CADASTRO = :pDataCadastro, '+
+          '   PACIENTES.DATA_ALTERACAO = :pDataAlteracao, '+
+          '   PACIENTES.USUARIO_ALTERACAO = :pUsuarioAlteracao, '+
+          '   PACIENTES.DATA_NASCIMENTO = :pDataNascimento, '+
+          '   PACIENTES.IDADE = :pIdade, '+
+          '   PACIENTES.TELEFONE = :pTelefone, '+
+          '   PACIENTES.EMAIL = :pEmail, '+
+          '   PACIENTES.PLANO_SAUDE = :pPlanoSaude '+
+          ' WHERE '+
+          '   PACIENTES.ID = :pId ';
+          
+  TModelPersisteDados.New
+    .PrepareStatement(lSql)
+    .AddParaments('pNome', aValue.Padrao.Nome) 
+    .AddParaments('pDataCadastro', aValue.Padrao.Data_Cadatro)
+    .AddParaments('pDataAlteracao', aValue.Padrao.Data_Altercao)
+    .AddParaments('pUsuarioAlteracao', aValue.Padrao.Usuario_Alteracao)
+    .AddParaments('pDataNascimento', aValue.DataNascimento) 
+    .AddParaments('pIdade', aValue.Idade)
+    .AddParaments('pTelefone', aValue.Telefone)
+    .AddParaments('pEmail', aValue.Email)  
+    .AddParaments('pPlanoSaude', aValue.Plano_Saude) 
+    .AddParaments('pId', aValue.Padrao.Id)
+    .ExecSQL;
+end;
+
+class function TModelDAOPacientes.New: iModelDAOInterfacesPacientes;
+begin
+  result := self.Create;
+end;
+
+end.

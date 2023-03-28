@@ -1,0 +1,12 @@
+unit Clinica.Controller.Entidades.Interfaces.Pacientes;
+
+interface
+  type
+  iControllerEntidadesInterfacesPacientes = interface
+    ['{D756D7A2-84B4-4238-ABA8-7F33315508F6}']
+    
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,68 @@
+unit Clinica.View.Permicoes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, 
+  Clinica.Model.Conexao.Interfaces, Vcl.Buttons;
+
+type
+  TFrmCadPermicoes = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    pnlLineHeader: TPanel;
+    Label3: TLabel;
+    edId: TEdit;
+    Label4: TLabel;
+    edNome: TEdit;
+    Label1: TLabel;
+    DataSource1: TDataSource;
+    BitBtnAlterar: TBitBtn;
+    BitBtn1: TBitBtn;
+    procedure FormCreate(Sender: TObject);
+    procedure BitBtnAlterarClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+  private
+    { Private declarations }
+    FDataSet : iModelDataSet;
+  public
+    { Public declarations }
+    procedure Sql(aValue : string);
+  end;
+
+implementation
+
+uses
+  Clinica.Controller.Conexao.DataSet, Clinica.Controller.Conexao.Connection;
+
+{$R *.dfm}
+
+procedure TFrmCadPermicoes.Sql(aValue: string);
+begin
+  FDataSet
+    .Close
+    .Clear
+    .Sql(' SELECT * FROM USUARIOS_PERMICOES WHERE USUARIOS_PERMICOES.ID_USUARIO = ' + aValue)
+    .Active;
+    DataSource1.DataSet := FDataSet.DataSet;
+end;
+
+procedure TFrmCadPermicoes.BitBtn1Click(Sender: TObject);
+begin
+  DataSource1.DataSet.Post;
+end;
+
+procedure TFrmCadPermicoes.BitBtnAlterarClick(Sender: TObject);
+begin
+  DataSource1.DataSet.Edit;
+end;
+
+procedure TFrmCadPermicoes.FormCreate(Sender: TObject);
+begin
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar); 
+end;
+
+end.

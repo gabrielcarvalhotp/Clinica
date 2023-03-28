@@ -1,0 +1,103 @@
+unit Clinica.Controller.ValorConsulta;
+
+interface
+
+uses
+  Clinica.Controller.Interfaces.ValorConsulta, Vcl.StdCtrls, 
+  Clinica.Model.Entidades.Interfaces.Pacientes;
+
+type
+  TControllerValorConsulta = class(TInterfacedObject, iControllerInterfacesValorConsulta)
+  private
+    { private }
+  public
+    { public }                             
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerInterfacesValorConsulta;
+    procedure Calcular(aMethod, aPlanoSaude : string; aParam : TEdit);
+    procedure Nutricionista(aValue : TEdit; aPlanoSaude : string);
+    procedure Cardiologista(aValue : TEdit; aPlanoSaude : string);
+    procedure Ortopedista(aValue : TEdit; aPlanoSaude : string);
+    procedure Terapeuta(aValue : TEdit; aPlanoSaude : string);
+  end;
+
+implementation
+
+uses 
+  System.Rtti;
+
+procedure TControllerValorConsulta.Calcular(aMethod, aPlanoSaude : string; aParam : TEdit);
+var
+  ctxRtti: TRttiContext;
+  typRtti: TRttiType;
+  mthRtti: TRttiMethod;
+  aParans : array of TValue;
+begin
+  ctxRtti := TRttiContext.Create;
+  try
+    typRtti := ctxRtti.GetType(self.ClassType);
+    mthRtti := typRtti.GetMethod(aMethod);
+    SetLength(aParans, 2);
+    aParans[0] := aParam;
+    aParans[1] := aPlanoSaude;
+    mthRtti.Invoke(self, aParans);
+  finally
+    ctxRtti.Free;
+  end;
+end;
+
+procedure TControllerValorConsulta.Cardiologista(aValue: TEdit; aPlanoSaude: string);
+begin
+
+end;
+
+constructor TControllerValorConsulta.Create;
+begin
+
+end;
+
+destructor TControllerValorConsulta.Destroy;
+begin
+  inherited;
+
+end;
+
+class function TControllerValorConsulta.New: iControllerInterfacesValorConsulta;
+begin
+  result := self.Create;
+end;
+
+procedure TControllerValorConsulta.Nutricionista(aValue : TEdit; aPlanoSaude : string);
+var
+  Valor : double;
+begin
+  if aPlanoSaude = 'UNIMED' then
+    aValue.Text := '120,00'
+  else
+    aValue.Text := '150,00';
+end;
+
+procedure TControllerValorConsulta.Ortopedista(aValue: TEdit; aPlanoSaude: string);
+var
+  Valor : double;
+begin
+  if aPlanoSaude = 'UNIMED' then
+    aValue.Text := '120,00'
+  else
+    aValue.Text := '150,00';
+
+end;
+
+procedure TControllerValorConsulta.Terapeuta(aValue: TEdit; aPlanoSaude: string);
+var
+  Valor : double;
+begin
+  if aPlanoSaude = 'UNIMED' then
+    aValue.Text := '120,00'
+  else
+    aValue.Text := '150,00';
+
+end;
+
+end.

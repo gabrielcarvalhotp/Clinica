@@ -1,0 +1,156 @@
+unit Clinica.Model.Entidades.Pacientes;
+
+interface
+
+uses
+  Clinica.Model.Entidades.Interfaces.Pacientes,
+  Clinica.Model.Conexao.Interfaces, 
+  Clinica.Model.Entidades.Interfaces.Padrao, 
+  Clinica.Model.Entidades.Interfaces.Permicoes, 
+  Data.DB;
+
+type
+  TModelEntidadesPacientes = class(TInterfacedObject, iModelEntidadesInterfacesPacientes)
+  private
+    FPadrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPacientes>;
+    FDataSet: iModelDataSet;
+    FDataNascimento : TDate;
+    FIdade : integer;
+    FTelefone : string;
+    FEmail : string;
+    FPlanoSaude : string;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelEntidadesInterfacesPacientes;
+    function DataNascimento(aValue: TDateTime): iModelEntidadesInterfacesPacientes; overload;
+    function Idade(aValue: string): iModelEntidadesInterfacesPacientes;overload;
+    function Telefone(aValue: string): iModelEntidadesInterfacesPacientes; overload;
+    function Email(aValue: string): iModelEntidadesInterfacesPacientes; overload;
+    function Plano_Saude(aValue: string) : iModelEntidadesInterfacesPacientes; overload;
+    function DataNascimento: TDateTime; overload;
+    function Idade: integer; overload;
+    function Telefone: string; overload;
+    function Email: string; overload;
+    function Plano_Saude: string; overload;
+    function DataSet: IModelDataSet;
+    function Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPacientes>;
+    function DataSource(aValue: TDataSource): iModelEntidadesInterfacesPacientes; 
+    procedure DAO;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.Entidades.Padrao, Clinica.Controller.Conexao.DataSet, 
+  Clinica.Controller.Conexao.Connection, System.SysUtils, 
+  Clinica.Model.DAO.Pacientes;
+
+{ TModelEntidadesPacientes }
+
+constructor TModelEntidadesPacientes.Create;
+begin
+  FPadrao := TModelEntidadesPadrao<iModelEntidadesInterfacesPacientes>.New(self);
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(TControllerConexaoConectar.New.Conectar)
+              .Close.Clear.Sql(' SELECT '+
+                               '   PACIENTES.ID AS CODIGO, '+
+                               '   PACIENTES.NOME AS NOME_PACIENTE, '+
+                               '   PACIENTES.DATA_NASCIMENTO, '+
+                               '   PACIENTES.IDADE, '+
+                               '   PACIENTES.TELEFONE, '+
+                               '   PACIENTES.EMAIL, '+
+                               '   PACIENTES.PLANO_SAUDE '+
+                               ' FROM '+
+                               '   PACIENTES ').Active;
+end;
+
+procedure TModelEntidadesPacientes.DAO;
+begin
+  TModelDAOPacientes.New.DAO(self)
+end;
+
+function TModelEntidadesPacientes.DataSet: IModelDataSet;
+begin
+  result := FDataSet;
+end;
+
+function TModelEntidadesPacientes.DataSource(aValue: TDataSource): iModelEntidadesInterfacesPacientes;
+begin
+  aValue.DataSet := FDataSet.DataSet;
+end;
+
+function TModelEntidadesPacientes.DataNascimento: TDateTime;
+begin
+  result := FDataNascimento;
+end;
+
+function TModelEntidadesPacientes.DataNascimento(aValue: TDateTime): iModelEntidadesInterfacesPacientes;
+begin
+  result := self;
+  FDataNascimento := aValue;
+end;
+
+destructor TModelEntidadesPacientes.Destroy;
+begin
+
+  inherited;
+end;
+
+function TModelEntidadesPacientes.Email: string;
+begin
+  result := FEmail;
+end;
+
+function TModelEntidadesPacientes.Email(aValue: string): iModelEntidadesInterfacesPacientes;
+begin
+  result := self;
+  FEmail := aValue;
+end;
+
+function TModelEntidadesPacientes.Idade: integer;
+begin
+  result := FIdade;
+end;
+
+function TModelEntidadesPacientes.Idade(aValue: string): iModelEntidadesInterfacesPacientes;
+begin
+  result := self;
+  FIdade := StrToInt(aValue);
+end;
+
+class function TModelEntidadesPacientes.New: iModelEntidadesInterfacesPacientes;
+begin
+  result := self.Create;
+end;
+
+function TModelEntidadesPacientes.Padrao: iModelEntidadesInterfacesPadrao<iModelEntidadesInterfacesPacientes>;
+begin
+  result := FPadrao;
+end;
+
+function TModelEntidadesPacientes.Plano_Saude(aValue: string): iModelEntidadesInterfacesPacientes;
+begin
+  result := self;
+  if aValue = '' then
+    raise Exception.Create('O plano de saúde não pode ser vazio!');
+  FPlanoSaude := aValue;
+end;
+
+function TModelEntidadesPacientes.Plano_Saude: string;
+begin
+  result := FPlanoSaude;
+end;
+
+function TModelEntidadesPacientes.Telefone(aValue: string): iModelEntidadesInterfacesPacientes;
+begin
+  result := self;
+  FTelefone := aValue;
+end;
+
+function TModelEntidadesPacientes.Telefone: string;
+begin
+  result := FTelefone;
+end;
+
+end.

@@ -1,0 +1,7 @@
+unit Clinica.Model.Entidades.Usuarios.Interfaces;
+
+interface
+
+implementation
+
+end.

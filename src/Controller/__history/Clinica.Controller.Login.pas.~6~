@@ -1,0 +1,51 @@
+unit Clinica.Controller.Login;
+
+interface
+
+uses
+  Clinica.Controller.Interfaces.Login, Clinica.Model.Interfaces.Login;
+
+type
+  TControllerLogin = class(TInterfacedObject, iControllerInterfacesLogin)
+  private
+    { private }
+    FConexao: iModelConnection;
+    FDataSet: iModelDataSet;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iControllerInterfacesLogin;
+    function Login : iModelInterfacesLogin;
+  end;
+
+implementation
+
+uses
+  Clinica.Model.Login;
+
+{ TControllerLogin }
+
+constructor TControllerLogin.Create;
+begin
+  FConexao := TControllerConexaoConectar.New.Conectar;
+  FDataSet := TControllerConexaoDataSet.New.FDataSet(FConexao)
+end;
+
+destructor TControllerLogin.Destroy;
+begin
+  inherited;
+
+end;
+
+function TControllerLogin.Login: iModelInterfacesLogin;
+begin
+  result := TModelLogin.New;
+end;
+
+class function TControllerLogin.New: iControllerInterfacesLogin;
+begin
+  result := self.Create;
+end;
+
+end.

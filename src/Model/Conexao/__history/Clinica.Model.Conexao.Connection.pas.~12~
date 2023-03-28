@@ -1,0 +1,92 @@
+unit Clinica.Model.Conexao.Connection;
+
+interface
+
+uses
+  Data.DB,
+  Firedac.Comp.Client,
+  Firedac.Phys.FB,
+  Firedac.Comp.UI,
+  Firedac.Stan.Intf,
+  Firedac.Stan.Option,
+  Firedac.Stan.Error,
+  Firedac.UI.Intf,
+  Firedac.Phys.Intf,
+  Firedac.Stan.Def,
+  Firedac.Stan.Pool,
+  Firedac.Stan.Async,
+  Firedac.Phys,
+  Firedac.Phys.FBDef,
+  Firedac.VCLUI.Wait,
+  Firedac.Phys.IBBase,
+  Firedac.DApt,
+  System.Classes,
+  Clinica.Model.Conexao.Interfaces;
+
+type
+  TModelConexaoConnection = class(TInterfacedObject, iModelConnection)
+  private
+    { private }
+    FConnection: TFDConnection;
+    FParametros : iModelConexaoParametros;
+    FDPhysFBDriverLink1: TFDPhysFBDriverLink;
+    FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+  public
+    { public }
+    constructor Create;
+    destructor Destroy; override;
+    class function New: iModelConnection;
+    function paramentros: iModelConexaoParametros;
+    function Conexao: TFDCustomConnection;
+    function Conectar: iModelConnection;
+  end;
+
+implementation
+
+{ TModelConexaoConnection }
+
+function TModelConexaoConnection.Conectar: iModelConnection;
+begin
+  result := self;
+  FConnection.DriverName := FParametros.DriverId;
+  FConnection.Params.Database := FParametros.DataBase;
+  FConnection.Params.UserName := FParametros.UserName;
+  FConnection.Params.Password := FParametros.Password;
+  FConnection.Params.Add('Server=' + FParametros.Server);
+  FConnection.Params.Add('Port='+ FParametros.Porta);
+  FConnection.LoginPrompt := false;
+  FConnection.Connected := True;
+end;
+
+function TModelConexaoConnection.Conexao: TFDCustomConnection;
+begin
+  result := FConnection;
+end;
+
+constructor TModelConexaoConnection.Create;
+begin
+  FConnection := TFDConnection.Create(nil);
+    //FParametros := iModelConexaoParametros;
+    FDPhysFBDriverLink1 := TFDPhysFBDriverLink.Create(nil);
+    FDGUIxWaitCursor1 := TFDGUIxWaitCursor.Create(nil);
+end;
+
+destructor TModelConexaoConnection.Destroy;
+begin
+  inherited;
+  FConnection.DisposeOf;
+  FDPhysFBDriverLink1.DisposeOf;
+  FDGUIxWaitCursor1.DisposeOf;
+end;
+
+class function TModelConexaoConnection.New: iModelConnection;
+begin
+  result := self.Create;
+end;
+
+function TModelConexaoConnection.paramentros: iModelConexaoParametros;
+begin
+  result := FParametros;
+end;
+
+end.

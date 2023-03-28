@@ -1,0 +1,61 @@
+program Clinica;
+
+uses
+  Vcl.Forms,
+  Clinica.View.Principal in 'src\View\Clinica.View.Principal.pas' {FrmPrincipal},
+  Clinica.Model.Conexao.Interfaces in 'src\Model\Conexao\Clinica.Model.Conexao.Interfaces.pas',
+  Clinica.Model.Conexao.Connection in 'src\Model\Conexao\Clinica.Model.Conexao.Connection.pas',
+  Clinica.Model.Conexao.Parametros in 'src\Model\Conexao\Clinica.Model.Conexao.Parametros.pas',
+  Clinica.Model.Conexao.DataSet in 'src\Model\Conexao\Clinica.Model.Conexao.DataSet.pas',
+  Clinica.Controller.Conexao.Interfaces in 'src\Controller\Conexao\Clinica.Controller.Conexao.Interfaces.pas',
+  Clinica.Controller.Conexao.Connection in 'src\Controller\Conexao\Clinica.Controller.Conexao.Connection.pas',
+  Clinica.Controller.Conexao.DataSet in 'src\Controller\Conexao\Clinica.Controller.Conexao.DataSet.pas',
+  Clinica.Model.Entidades.Interfaces.Padrao in 'src\Model\Entidades\Interfaces\Clinica.Model.Entidades.Interfaces.Padrao.pas',
+  Clinica.Model.Entidades.Padrao in 'src\Model\Entidades\Clinica.Model.Entidades.Padrao.pas',
+  Clinica.Model.Entidades.Interfaces.Usuarios in 'src\Model\Entidades\Interfaces\Clinica.Model.Entidades.Interfaces.Usuarios.pas',
+  Clinica.Model.Entidades.Usuarios in 'src\Model\Entidades\Clinica.Model.Entidades.Usuarios.pas',
+  Clinica.Model.Entidades.Interfaces.Permicoes in 'src\Model\Entidades\Interfaces\Clinica.Model.Entidades.Interfaces.Permicoes.pas',
+  Clinica.Model.Entidades.Permicoes in 'src\Model\Entidades\Clinica.Model.Entidades.Permicoes.pas',
+  Clinica.View.Login in 'src\View\Clinica.View.Login.pas' {FrmLogin},
+  Clinica.Controller.Entidades.Usuarios in 'src\Controller\Entidades\Clinica.Controller.Entidades.Usuarios.pas',
+  Clinica.Controller.Entidades.Interfaces.Usuarios in 'src\Controller\Entidades\Interfaces\Clinica.Controller.Entidades.Interfaces.Usuarios.pas',
+  Clinica.Model.Login in 'src\Model\Clinica.Model.Login.pas',
+  Clinica.Model.Interfaces.Login in 'src\Model\Interfaces\Clinica.Model.Interfaces.Login.pas',
+  Clinica.Controller.Login in 'src\Controller\Clinica.Controller.Login.pas',
+  Clinica.Controller.Interfaces.Login in 'src\Controller\Interfaces\Clinica.Controller.Interfaces.Login.pas',
+  Clinica.View.CadPadrao in 'src\View\Clinica.View.CadPadrao.pas' {FrmCadPadrao},
+  Clinica.View.Usuarios in 'src\View\Clinica.View.Usuarios.pas' {FrmCadUsuarios},
+  Clinica.Model.DAO.Interfaces.Usuarios in 'src\Model\DAO\interfaces\Clinica.Model.DAO.Interfaces.Usuarios.pas',
+  Clinica.Model.DAO.Usuarios in 'src\Model\DAO\Clinica.Model.DAO.Usuarios.pas',
+  Clinica.Model.Interfaces.PersisteDados in 'src\Model\Interfaces\Clinica.Model.Interfaces.PersisteDados.pas',
+  Clinica.Model.PersisteDados in 'src\Model\Clinica.Model.PersisteDados.pas',
+  Clinica.Model.Entidades.Interfaces.Pacientes in 'src\Model\Entidades\Interfaces\Clinica.Model.Entidades.Interfaces.Pacientes.pas',
+  Clinica.Model.Entidades.Pacientes in 'src\Model\Entidades\Clinica.Model.Entidades.Pacientes.pas',
+  Clinica.Controller.Entidades.Interfaces.Pacientes in 'src\Controller\Entidades\Interfaces\Clinica.Controller.Entidades.Interfaces.Pacientes.pas',
+  Clinica.Controller.Entidades.Pacientes in 'src\Controller\Entidades\Clinica.Controller.Entidades.Pacientes.pas',
+  Clinica.Model.DAO.Interfaces.Pacientes in 'src\Model\DAO\interfaces\Clinica.Model.DAO.Interfaces.Pacientes.pas',
+  Clinica.Model.DAO.Pacientes in 'src\Model\DAO\Clinica.Model.DAO.Pacientes.pas',
+  Clinica.View.Pacientes in 'src\View\Clinica.View.Pacientes.pas' {FrmCadPacientes},
+  Clinica.Model.Entidades.Interfaces.Agendamentos in 'src\Model\Entidades\Interfaces\Clinica.Model.Entidades.Interfaces.Agendamentos.pas',
+  Clinica.Model.Entidades.Agendamentos in 'src\Model\Entidades\Clinica.Model.Entidades.Agendamentos.pas',
+  Clinica.Model.DAO.Interfaces.Agendamentos in 'src\Model\DAO\interfaces\Clinica.Model.DAO.Interfaces.Agendamentos.pas',
+  Clinica.Model.DAO.Agendamentos in 'src\Model\DAO\Clinica.Model.DAO.Agendamentos.pas',
+  Clinica.Controller.Entidades.Interfaces.Agendamentos in 'src\Controller\Entidades\Interfaces\Clinica.Controller.Entidades.Interfaces.Agendamentos.pas',
+  Clinica.Controller.Entidades.Agendamentos in 'src\Controller\Entidades\Clinica.Controller.Entidades.Agendamentos.pas',
+  Clinica.View.Agendamentos in 'src\View\Clinica.View.Agendamentos.pas' {FrmCadAgendamentos},
+  Clinica.View.LookUpPadrao in 'src\View\Clinica.View.LookUpPadrao.pas' {FrmPesquisa},
+  Clinica.Controller.Interfaces.Pesquisa in 'src\Controller\Interfaces\Clinica.Controller.Interfaces.Pesquisa.pas',
+  Clinica.Model.Pesquisa.Pacientes in 'src\Model\Clinica.Model.Pesquisa.Pacientes.pas',
+  Clinica.Controller.ValorConsulta in 'src\Controller\Clinica.Controller.ValorConsulta.pas',
+  Clinica.Controller.Interfaces.ValorConsulta in 'src\Controller\Interfaces\Clinica.Controller.Interfaces.ValorConsulta.pas',
+  Clinica.View.Permicoes in 'src\View\Clinica.View.Permicoes.pas' {Form3};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFrmPrincipal, FrmPrincipal);
+  Application.CreateForm(TForm3, Form3);
+  Application.Run;
+end.

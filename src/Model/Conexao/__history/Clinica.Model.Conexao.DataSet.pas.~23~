@@ -1,0 +1,130 @@
+unit Clinica.Model.Conexao.DataSet;
+
+interface
+
+uses
+  FireDAC.Comp.Client, 
+  Data.DB,
+  Clinica.Model.Conexao.Interfaces,
+  FireDAC.Stan.Param;
+
+type
+  TModelConexaoDataSet = class(TInterfacedObject, iModelDataSet)
+  private
+    { private }
+    FConnection : iModelConnection;
+    FDataSet : TFDQuery;
+  public
+    { public }
+    constructor Create(aValue: iModelConnection);
+    destructor Destroy; override;
+    class function New(aValue: iModelConnection): iModelDataSet;
+    function Close: iModelDataSet;
+    function Clear: iModelDataSet;
+    function Sql(aValue : string): iModelDataSet;
+    function FieldByName(aValue: string): variant;
+    function Active: iModelDataSet;
+    function DataSet: TFDQuery;
+    function ParamsByName(aName, aValue : variant) : iModelDataSet;
+
+    function ParamsByName(aName, aValue : integer) : iModelDataSet;overload; 
+    function ParamsByName(aName, aValue : string) : iModelDataSet;overload; 
+    function ParamsByName(aName, aValue : double) : iModelDataSet;overload; 
+    function ParamsByName(aName, aValue : TDateTime) : iModelDataSet;overload;  
+    function ParamsByName(aName, aValue : TDate) : iModelDataSet;overload;  
+    function ParamsByName(aName, aValue : TTime) : iModelDataSet;overload; 
+  end;
+
+implementation
+
+{ TModelConexaoDataSet }
+
+function TModelConexaoDataSet.Active: iModelDataSet;
+begin
+  result := self;
+  FDataSet.Active := true;
+end;
+
+function TModelConexaoDataSet.Clear: iModelDataSet;
+begin
+  result := self;
+  FDataSet.SQL.Clear;
+end;
+
+function TModelConexaoDataSet.Close: iModelDataSet;
+begin
+  result := self;
+  FDataSet.Close;
+end;
+
+constructor TModelConexaoDataSet.Create(aValue: iModelConnection);
+begin
+  FDataSet := TFDQuery.Create(nil);
+  FConnection := aValue;
+  FDataSet.Connection := FConnection.Conexao;
+end;
+
+function TModelConexaoDataSet.DataSet : TFDQuery;
+begin
+  result := FDataSet;
+end;
+
+destructor TModelConexaoDataSet.Destroy;
+begin
+  inherited;
+  FDataSet.Free;
+end;
+
+function TModelConexaoDataSet.FieldByName(aValue: string): variant;
+begin
+  result := FDataSet.FieldByName(aValue).Value;
+end;
+
+class function TModelConexaoDataSet.New(aValue: iModelConnection): iModelDataSet;
+begin
+  result := self.Create(aValue);
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: double): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: string): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: integer): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: TTime): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: TDate): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: TDateTime): iModelDataSet;
+begin
+
+end;
+
+function TModelConexaoDataSet.ParamsByName(aName, aValue: variant): iModelDataSet;
+begin
+  result := self;
+  FDataSet.ParamByName(aName).Value := aValue;
+end;
+
+function TModelConexaoDataSet.Sql(aValue : string): iModelDataSet;
+begin
+  result := self;
+  FDataSet.SQL.add(aValue);
+end;
+
+end.

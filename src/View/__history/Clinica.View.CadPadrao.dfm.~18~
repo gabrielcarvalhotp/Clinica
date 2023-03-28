@@ -1,0 +1,326 @@
+object FrmCadPadrao: TFrmCadPadrao
+  Left = 0
+  Top = 0
+  Caption = 'FrmCadPadrao'
+  ClientHeight = 621
+  ClientWidth = 1103
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object pnlMain: TPanel
+    Left = 0
+    Top = 0
+    Width = 1103
+    Height = 621
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    object pnlHeader: TPanel
+      Left = 0
+      Top = 0
+      Width = 1103
+      Height = 65
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      object Label1: TLabel
+        Left = 24
+        Top = 10
+        Width = 92
+        Height = 39
+        Caption = 'Label1'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -32
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object pnlLineHeader: TPanel
+        AlignWithMargins = True
+        Left = 10
+        Top = 59
+        Width = 1083
+        Height = 3
+        Margins.Left = 10
+        Margins.Right = 10
+        Align = alBottom
+        BevelOuter = bvNone
+        Color = clRed
+        ParentBackground = False
+        TabOrder = 0
+      end
+    end
+    object pnlGrid: TPanel
+      AlignWithMargins = True
+      Left = 10
+      Top = 68
+      Width = 1083
+      Height = 550
+      Margins.Left = 10
+      Margins.Right = 10
+      Align = alClient
+      TabOrder = 1
+      object CardPanel: TCardPanel
+        Left = 1
+        Top = 1
+        Width = 1081
+        Height = 548
+        Align = alClient
+        ActiveCard = CardPesquisa
+        Caption = 'CardPanel'
+        TabOrder = 0
+        object CardPesquisa: TCard
+          Left = 1
+          Top = 1
+          Width = 1079
+          Height = 546
+          Caption = 'CardPesquisa'
+          CardIndex = 0
+          TabOrder = 0
+          object pnlGridHeader: TPanel
+            Left = 0
+            Top = 0
+            Width = 1079
+            Height = 49
+            Align = alTop
+            TabOrder = 0
+            DesignSize = (
+              1079
+              49)
+            object Label2: TLabel
+              Left = 12
+              Top = 1
+              Width = 42
+              Height = 13
+              Caption = 'Pesquisa'
+            end
+            object Edit1: TEdit
+              Left = 12
+              Top = 14
+              Width = 301
+              Height = 27
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Tahoma'
+              Font.Style = []
+              ParentFont = False
+              TabOrder = 0
+              OnChange = Edit1Change
+            end
+            object btnPesquisa: TBitBtn
+              Left = 319
+              Top = 14
+              Width = 32
+              Height = 27
+              Glyph.Data = {
+                360C0000424D360C000000000000360000002800000020000000200000000100
+                180000000000000C0000C40E0000C40E00000000000000000000FFFFFFFFFFFF
+                FFFFFFFCFCF5E9E8BAE1E0A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1
+                A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2
+                E1A4E2E1A4E2E1A4E1E0A4E9E8BAFCFCF5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+                DEDD9BB2AF11ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00B2B011DFDD9BFFFFFFFFFFFFFFFFFFDEDD9B
+                ACA901ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ACA901DFDD9BFFFFFFFCFBF5B2AF11
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B2B011FCFCF5E9E8BAADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E9E8BAE2E1A5ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E1E0A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B0AD09CDCB65B4B117ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00D0CE6EFFFFFFF2F2D8B5B219ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B7B420F6F5E3FFFFFFF2F2D8B5B2
+                19ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B8B624F6F5E3FFFFFFF2F2
+                D8B5B219ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B8B624F6F5E3FFFF
+                FFF2F2D8B5B219B3B013CDCB65DBDA90D9D88BC9C757AFAC08ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B8B624F6F5
+                E3FFFFFFF5F4E0F4F3DDD7D684C6C44EC7C551DAD98DF1F1D6C2BF41ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B8B6
+                24F7F7E8EAE9BEB2AF11ADAA00ADAA00ADAA00ADAA00B6B41EF0EFD0C0BE3DAD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B4B1
+                17F4F4DEB2AF10ADAA00ADAA00ADAA00ADAA00ADAA01BAB729BAB729F1F1D6AE
+                AB03ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00D0CE
+                6ED7D684ADAA00ADAA00ADAA00ADAA00ADAA00B6B31DF4F4DEAFAC06E5E4AFC2
+                C043ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00DEDD
+                9AC7C551ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E5E4AFBFBC38D4D27AD1
+                CF70ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00DDDC
+                97C9C757ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E7E6B6BDBA32D5D47ED0
+                CE6EADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00CDCB
+                64DCDB94ADAA00ADAA00ADAA00ADAA00ADAA00B6B41FF1F1D6ADAA02E9E8BBC0
+                BD3BADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B1AE
+                0EF5F5E1B7B521ADAA00ADAA00ADAA00ADAA00ADAA00B4B116C0BE3DEFEFCFAD
+                AA01ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00C6C44FF1F0D4B9B625ADAA00ADAA00ADAA00ADAA00C1BF3FF4F4DDBCBA30AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00C4C248F3F2DAE3E2A8D2D176D5D37CE9E8BBEFEFCFBCBA30ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00AEAB05C3C147D1D072D0CE6EC0BD3BADAA01ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A4ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E2E1A4E2E1A5ADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E1E0A4E9E8BAADAA00
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00E9E8BAFCFBF5B2AF11
+                ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00B2AF11FCFCF5FFFFFFDFDE9C
+                ACA901ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00ADAA00ACA901DEDD9BFFFFFFFFFFFFFFFFFF
+                DFDE9CB2AF11ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA
+                00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00ADAA00AD
+                AA00ADAA00ADAA00ADAA00ADAA00B2AF11DEDD9BFFFFFFFFFFFFFFFFFFFFFFFF
+                FFFFFFFCFBF5E9E8BAE2E1A5E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1
+                A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2E1A4E2
+                E1A4E2E1A4E2E1A4E2E1A5E9E8BAFCFBF5FFFFFFFFFFFFFFFFFF}
+              TabOrder = 1
+            end
+            object BitBtnInserir: TBitBtn
+              Left = 825
+              Top = 14
+              Width = 75
+              Height = 27
+              Anchors = [akTop, akRight]
+              Caption = 'Inserir'
+              TabOrder = 2
+              OnClick = BitBtnInserirClick
+            end
+            object BitBtnAlterar: TBitBtn
+              Left = 906
+              Top = 14
+              Width = 75
+              Height = 27
+              Anchors = [akTop, akRight]
+              Caption = 'Alterar'
+              TabOrder = 3
+              OnClick = BitBtnAlterarClick
+            end
+            object BitBtnDaletar: TBitBtn
+              Left = 987
+              Top = 14
+              Width = 75
+              Height = 27
+              Anchors = [akTop, akRight]
+              Caption = 'Deletar'
+              TabOrder = 4
+              OnClick = BitBtnDaletarClick
+            end
+          end
+          object DBGridPesquisa: TDBGrid
+            Left = 0
+            Top = 49
+            Width = 1079
+            Height = 497
+            Align = alClient
+            BorderStyle = bsNone
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Tahoma'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -19
+            TitleFont.Name = 'Tahoma'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridPesquisaDrawColumnCell
+          end
+        end
+        object CardCadastro: TCard
+          Left = 1
+          Top = 1
+          Width = 1079
+          Height = 546
+          Caption = 'CardCadastro'
+          CardIndex = 1
+          TabOrder = 1
+          object pnlGridFooter: TPanel
+            Left = 0
+            Top = 497
+            Width = 1079
+            Height = 49
+            Align = alBottom
+            TabOrder = 0
+            DesignSize = (
+              1079
+              49)
+            object BitBtnSalvar: TBitBtn
+              Left = 987
+              Top = 11
+              Width = 75
+              Height = 27
+              Anchors = [akTop, akRight]
+              Caption = 'Salvar'
+              TabOrder = 0
+              OnClick = BitBtnSalvarClick
+            end
+            object BitBtnCancelar: TBitBtn
+              Left = 906
+              Top = 11
+              Width = 75
+              Height = 27
+              Anchors = [akTop, akRight]
+              Caption = 'Cancelar'
+              TabOrder = 1
+              OnClick = BitBtnCancelarClick
+            end
+          end
+        end
+      end
+    end
+  end
+  object DataSource1: TDataSource
+    Left = 752
+    Top = 448
+  end
+end
